@@ -1,0 +1,380 @@
+.dashboard-home {
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 2.6rem;
+    padding-bottom: 0.8rem;
+}
+
+.title-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.title-text {
+    font-weight: 900;
+    font-size: clamp(2.7rem, 4.8vw, 4rem);
+    line-height: 1.12;
+    letter-spacing: 1px;
+    color: #073b2d;
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    text-shadow: none;
+}
+
+.subtitle {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 44px auto;
+    color: #14532d;
+    font-size: 1.18rem;
+    font-weight: 800;
+    line-height: 1.75;
+}
+
+.subtitle span {
+    display: block;
+    text-align: center;
+}
+
+.section-title {
+    text-align: center;
+    color: #073b2d;
+    font-size: 1.45rem;
+    font-weight: 900;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+/* =========================
+   PILIH METODE INPUT GAMBAR
+========================= */
+.block-container [data-testid="stRadio"] div[role="radiogroup"] {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 34px !important;
+    width: 100% !important;
+}
+
+.block-container [data-testid="stRadio"] div[role="radiogroup"] label {
+    width: 215px !important;
+    height: 62px !important;
+    min-height: 62px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1.6px solid #b7e4c7 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+.block-container [data-testid="stRadio"] div[role="radiogroup"] label p {
+    color: #14532d !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+}
+
+.block-container [data-testid="stRadio"] div[role="radiogroup"] label:hover {
+    background: #f0fdf4 !important;
+    border-color: #22c55e !important;
+}
+
+.block-container [data-testid="stRadio"] div[role="radiogroup"] label:has(input:checked) {
+    background: rgba(34, 197, 94, 0.28) !important;
+    border: 2px solid #22c55e !important;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.18) !important;
+}
+
+/* =========================
+   CUSTOM UPLOAD STYLE
+========================= */
+[data-testid="stFileUploader"] {
+    max-width: 760px !important;
+    margin: 0 auto 4px auto !important;
+    padding: 18px !important;
+    border-radius: 18px !important;
+    background: rgba(7, 31, 20, 0.92) !important;
+    border: 1.5px solid rgba(74, 222, 128, 0.22) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.20) !important;
+}
+
+[data-testid="stFileUploader"] label p {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+}
+
+[data-testid="stFileUploader"] section {
+    min-height: 180px !important;
+    border-radius: 16px !important;
+    border: 1.5px dashed rgba(134, 239, 172, 0.30) !important;
+    background: rgba(15, 40, 25, 0.95) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+[data-testid="stFileUploader"] section > div {
+    color: #ffffff !important;
+}
+
+[data-testid="stFileUploader"] section p,
+[data-testid="stFileUploader"] section span,
+[data-testid="stFileUploader"] section small,
+[data-testid="stFileUploader"] section div {
+    color: #ffffff !important;
+}
+
+[data-testid="stFileUploader"] svg {
+    color: #86efac !important;
+    fill: #86efac !important;
+    width: 34px !important;
+    height: 34px !important;
+}
+
+[data-testid="stFileUploader"] section button {
+    background: #1f6f43 !important;
+    color: #ffffff !important;
+    border: 1px solid #4ade80 !important;
+    border-radius: 999px !important;
+    padding: 0.5rem 1.1rem !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+}
+
+[data-testid="stFileUploader"] section button:hover {
+    background: #228b50 !important;
+    border-color: #86efac !important;
+}
+
+[data-testid="stFileUploaderFile"] {
+    background: rgba(10, 27, 18, 0.92) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(74, 222, 128, 0.15) !important;
+    padding: 10px 12px !important;
+    margin-top: 10px !important;
+}
+
+[data-testid="stFileUploaderFile"] div,
+[data-testid="stFileUploaderFile"] span,
+[data-testid="stFileUploaderFile"] p {
+    color: #d1fae5 !important;
+    font-weight: 400 !important;
+}
+
+[data-testid="stFileUploaderFile"] button,
+[data-testid="stFileUploaderFile"] button:hover,
+[data-testid="stFileUploaderFile"] button:focus,
+[data-testid="stFileUploaderFile"] button:active {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #ffffff !important;
+}
+
+[data-testid="stFileUploader"] small {
+    color: #cbd5e1 !important;
+    font-size: 1rem !important;
+}
+
+/* =========================
+   CAMERA STYLE
+========================= */
+
+/* Kotak luar kamera */
+[data-testid="stCameraInput"] {
+    max-width: 760px !important;
+    margin: 0 auto 4px auto !important;
+    padding: 14px !important;
+    border-radius: 18px !important;
+
+    background: rgba(7, 31, 20, 0.92) !important;
+    border: 1.5px solid rgba(74, 222, 128, 0.22) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.20) !important;
+
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Hilangkan area abu-abu bawaan di dalam kamera */
+[data-testid="stCameraInput"] > div,
+[data-testid="stCameraInput"] section,
+[data-testid="stCameraInput"] div {
+    background: transparent !important;
+}
+
+/* Hilangkan label tulisan kamera */
+[data-testid="stCameraInput"] > label,
+[data-testid="stCameraInput"] label,
+[data-testid="stCameraInput"] label p {
+    display: none !important;
+}
+
+/* Area video/foto kamera */
+[data-testid="stCameraInput"] video,
+[data-testid="stCameraInput"] img {
+    width: 100% !important;
+    max-width: 730px !important;
+    height: 355px !important;
+
+    object-fit: cover !important;
+    border-radius: 14px !important;
+
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    border: 1.5px dashed rgba(134, 239, 172, 0.30) !important;
+    background: rgba(15, 40, 25, 0.95) !important;
+}
+
+/* Tombol Take Photo */
+[data-testid="stCameraInput"] button {
+    width: 100% !important;
+    max-width: 730px !important;
+
+    display: block !important;
+    margin: 12px auto 0 auto !important;
+
+    background: #1f6f43 !important;
+    color: #ffffff !important;
+    border: 1px solid #4ade80 !important;
+    border-radius: 999px !important;
+
+    font-weight: 700 !important;
+    box-shadow: none !important;
+}
+
+/* Hover tombol Take Photo */
+[data-testid="stCameraInput"] button:hover {
+    background: #228b50 !important;
+    border-color: #86efac !important;
+}
+
+/* Teks tombol Take Photo */
+[data-testid="stCameraInput"] button p,
+[data-testid="stCameraInput"] button span,
+[data-testid="stCameraInput"] button div {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* =========================
+   TOMBOL ANALISIS GAMBAR
+========================= */
+.stButton {
+    max-width: 760px !important;
+    margin: 4px auto 0 auto !important;
+    padding: 0 !important;
+    position: relative !important;
+    z-index: 50 !important;
+}
+
+.stButton > button {
+    width: 100% !important;
+    max-width: 760px !important;
+    margin: 0 auto 0 auto !important;
+    display: block !important;
+
+    background: rgba(15, 40, 25, 0.95) !important;
+    color: #ffffff !important;
+    border: 1.5px dashed rgba(134, 239, 172, 0.30) !important;
+    border-radius: 12px !important;
+
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    min-height: 46px !important;
+
+    box-shadow: none !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    position: relative !important;
+    z-index: 60 !important;
+}
+
+.stButton > button:hover {
+    background: rgba(20, 60, 35, 0.98) !important;
+    color: #ffffff !important;
+    border-color: rgba(134, 239, 172, 0.55) !important;
+}
+
+.stButton > button p,
+.stButton > button span,
+.stButton > button div {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+/* =========================
+   RESPONSIVE DASHBOARD
+========================= */
+@media (max-width: 768px) {
+    .dashboard-home {
+        padding-top: 1rem;
+    }
+
+    .title-text {
+        font-size: 2rem !important;
+        line-height: 1.15 !important;
+        margin-bottom: 18px !important;
+    }
+
+    .subtitle {
+        max-width: 100%;
+        margin: 0 auto 24px auto;
+        font-size: 0.98rem;
+        line-height: 1.65;
+    }
+
+    .section-title {
+        font-size: 1.2rem !important;
+        margin-bottom: 14px;
+    }
+
+    .block-container [data-testid="stRadio"] div[role="radiogroup"] {
+        gap: 12px !important;
+    }
+
+    .block-container [data-testid="stRadio"] div[role="radiogroup"] label {
+        width: 155px !important;
+        height: 54px !important;
+        min-height: 54px !important;
+        font-size: 0.9rem !important;
+    }
+
+    [data-testid="stFileUploader"],
+    [data-testid="stCameraInput"],
+    .stButton,
+    .stButton > button {
+        max-width: 100% !important;
+    }
+
+    [data-testid="stCameraInput"] video,
+    [data-testid="stCameraInput"] img {
+        height: 280px !important;
+    }
+}
+
+.undetected-box {
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+.undetected-text {
+    color: #073b2d !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    margin: 6px 0 0 0 !important;
+}

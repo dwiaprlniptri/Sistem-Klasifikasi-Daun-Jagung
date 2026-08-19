@@ -1,0 +1,46 @@
+.block-container {
+    max-width: 1350px !important;
+    padding-top: 1rem !important;
+    padding-bottom: 2rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+}
+
+header {
+    visibility: visible !important;
+    background: transparent !important;
+}
+
+img {
+    border-radius: 14px;
+}
+
+/* Hilangkan semua buletan radio */
+[data-testid="stRadio"] input[type="radio"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+[data-testid="stRadio"] label > div:first-child {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+[data-testid="stRadio"] svg,
+[data-testid="stRadio"] circle {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+[data-testid="stRadio"] div[role="radiogroup"] label {
+    gap: 0 !important;
+}

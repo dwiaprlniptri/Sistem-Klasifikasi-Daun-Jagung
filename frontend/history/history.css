@@ -1,0 +1,43 @@
+.history-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.history-thumb {
+    width: 175px;
+    height:175px;
+    object-fit: fill;
+    border-radius: 10px;
+    flex: 0 0 175px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.history-card {
+    flex: 1;
+    width: 100%;
+    min-height: 175px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(27, 94, 32, 0.18);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.history-title {
+    font-weight: 900;
+    color: #14532d;
+    margin-bottom: 6px;
+    font-size: 27px;
+}
+
+.history-meta {
+    color: #5f6f64;
+    font-size: 23px;
+}
