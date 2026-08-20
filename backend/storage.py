@@ -8,6 +8,7 @@ import streamlit as st
 from PIL import Image
 from supabase import Client, create_client
 
+from backend.device import get_device_id
 from config import (
     DETAIL_TABLE,
     HISTORY_IMAGE_MAX_SIZE,
@@ -107,6 +108,7 @@ def add_history(method, label, confidence, image, prediction_details=None):
         .insert(
             {
                 "created_at": datetime.now(timezone.utc).isoformat(),
+                "device_id": get_device_id(),
                 "method": method,
                 "label": label,
                 "confidence": round(confidence * 100, 2),
@@ -141,6 +143,7 @@ def get_history(limit=10):
     response = (
         client.table(HISTORY_TABLE)
         .select("id, created_at, method, label, confidence, image_path, image_url")
+        .eq("device_id", get_device_id())
         .order("id", desc=True)
         .limit(limit)
         .execute()
@@ -161,6 +164,7 @@ def get_history_count():
     response = (
         client.table(HISTORY_TABLE)
         .select("id", count="exact")
+        .eq("device_id", get_device_id())
         .limit(1)
         .execute()
     )
@@ -187,11 +191,18 @@ def clear_history():
     """Kosongkan seluruh riwayat beserta file gambarnya."""
     client = get_client()
 
-    response = client.table(HISTORY_TABLE).select("image_path").execute()
+    device_id = get_device_id()
+
+    response = (
+        client.table(HISTORY_TABLE)
+        .select("image_path")
+        .eq("device_id", device_id)
+        .execute()
+    )
     remove_history_images(row.get("image_path") for row in (response.data or []))
 
     # prediction_detail ikut terhapus lewat ON DELETE CASCADE
-    client.table(HISTORY_TABLE).delete().gt("id", 0).execute()
+    client.table(HISTORY_TABLE).delete().eq("device_id", device_id).execute()
 
 
 # ==========================================
