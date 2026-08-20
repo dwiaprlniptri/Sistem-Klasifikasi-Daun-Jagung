@@ -40,14 +40,14 @@ CLASS_NAMES = ["Blight", "Common Rus", "Gray Leaf Spot", "Healthy"]
 CLASS_DISPLAY = {
     "Blight": "Blight",
     "Common Rus": "Common Rust",
-    "Gray Leaf Spotercak": "Gray Leaf Spot",
+    "Gray Leaf Spot": "Gray Leaf Spot",
     "Healthy": "Healthy",
     "Tidak Terdeteksi": "Tidak Terdeteksi",
 }
 
 CLASS_COLOR = {
     "Healthy": "result-green",
-    "Hawar": "result-red",
+    "Blight": "result-red",
     "Common Rus": "result-orange",
     "Gray Leaf Spot": "result-yellow",
 }
@@ -62,7 +62,7 @@ DISEASE_INFO = {
         "Blight atau hawar daun biasanya ditandai dengan bercak memanjang "
         "berwarna cokelat hingga keabu-abuan pada daun jagung."
     ),
-    "Common Rust": (
+    "Common Rus": (
         "Common Rust atau karat daun biasanya ditandai dengan bintik-bintik kecil "
         "berwarna cokelat kemerahan seperti karat pada permukaan daun jagung."
     ),
@@ -97,25 +97,60 @@ INVALID_IMAGE_INFO = (
 # SUPABASE (PostgreSQL + Storage)
 # ==========================================
 def get_setting(name, default=""):
-    """Ambil konfigurasi dari st.secrets, lalu fallback ke environment variable."""
+    """
+    Ambil konfigurasi dengan urutan:
+    1. st.secrets di level paling atas
+    2. st.secrets di dalam section mana pun, misal [supabase]
+    3. environment variable
+    """
     try:
-        if name in st.secrets:
-            return str(st.secrets[name]).strip()
+        secrets = st.secrets
+
+        if name in secrets:
+            return str(secrets[name]).strip()
+
+        for key in secrets.keys():
+            try:
+                section = secrets[key]
+            except Exception:
+                continue
+
+            if hasattr(section, "keys") and name in section:
+                return str(section[name]).strip()
     except Exception:
-        # secrets.toml belum dibuat, abaikan dan lanjut ke environment variable
+        # secrets.toml belum ada, abaikan dan lanjut ke environment variable
         pass
 
     return os.environ.get(name, default).strip()
 
 
-SUPABASE_URL = get_setting("SUPABASE_URL")
-SUPABASE_KEY = get_setting("SUPABASE_KEY")
-SUPABASE_BUCKET = get_setting("SUPABASE_BUCKET", "leaf-images")
+def describe_secrets():
+    """Ringkasan isi st.secrets untuk pesan error. Nilainya tidak pernah ditampilkan."""
+    try:
+        keys = list(st.secrets.keys())
+    except Exception as e:
+        return f"st.secrets tidak bisa dibaca ({type(e).__name__})"
+
+    if not keys:
+        return "st.secrets kosong"
+
+    detail = []
+    for key in keys:
+        try:
+            value = st.secrets[key]
+        except Exception:
+            continue
+
+        if hasattr(value, "keys"):
+            detail.append(f"[{key}] berisi {list(value.keys())}")
+        else:
+            detail.append(key)
+
+    return "Key yang terbaca: " + ", ".join(detail)
+
 
 HISTORY_TABLE = "analysis_history"
 DETAIL_TABLE = "prediction_detail"
-
-APP_TIMEZONE = get_setting("APP_TIMEZONE", "Asia/Jakarta")
 
 HISTORY_LIMIT = 100
 HISTORY_IMAGE_MAX_SIZE = (500, 500)

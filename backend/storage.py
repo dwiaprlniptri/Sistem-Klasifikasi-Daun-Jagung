@@ -9,13 +9,11 @@ from PIL import Image
 from supabase import Client, create_client
 
 from config import (
-    APP_TIMEZONE,
     DETAIL_TABLE,
     HISTORY_IMAGE_MAX_SIZE,
     HISTORY_TABLE,
-    SUPABASE_BUCKET,
-    SUPABASE_KEY,
-    SUPABASE_URL,
+    describe_secrets,
+    get_setting,
 )
 
 try:
@@ -31,16 +29,30 @@ class StorageNotConfigured(Exception):
 # ==========================================
 # KONEKSI
 # ==========================================
+def get_bucket_name():
+    """Nama bucket Supabase Storage, dibaca saat dibutuhkan."""
+    return get_setting("SUPABASE_BUCKET", "leaf-images")
+
+
 @st.cache_resource(show_spinner=False)
+def _build_client(url: str, key: str) -> Client:
+    return create_client(url, key)
+
+
 def get_client() -> Client:
-    """Buat satu koneksi Supabase yang dipakai ulang selama aplikasi berjalan."""
-    if not SUPABASE_URL or not SUPABASE_KEY:
+    """Buat koneksi Supabase. Kredensial dibaca ulang setiap kali dipanggil."""
+    url = get_setting("SUPABASE_URL")
+    key = get_setting("SUPABASE_KEY")
+
+    if not url or not key:
         raise StorageNotConfigured(
-            "SUPABASE_URL dan SUPABASE_KEY belum diisi. "
-            "Lengkapi file .streamlit/secrets.toml terlebih dahulu."
+            "SUPABASE_URL dan SUPABASE_KEY belum terbaca aplikasi.\n\n"
+            f"{describe_secrets()}\n\n"
+            "Isi lewat Manage app -> Settings -> Secrets, rata kiri tanpa "
+            "header [section], lalu Reboot app."
         )
 
-    return create_client(SUPABASE_URL, SUPABASE_KEY)
+    return _build_client(url, key)
 
 
 # ==========================================
@@ -60,7 +72,7 @@ def upload_history_image(image: Image.Image):
         f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}.png"
     )
 
-    bucket = client.storage.from_(SUPABASE_BUCKET)
+    bucket = client.storage.from_(get_bucket_name())
     bucket.upload(
         object_path,
         buffer.getvalue(),
@@ -78,7 +90,7 @@ def remove_history_images(object_paths):
         return
 
     client = get_client()
-    client.storage.from_(SUPABASE_BUCKET).remove(paths)
+    client.storage.from_(get_bucket_name()).remove(paths)
 
 
 # ==========================================
@@ -200,7 +212,7 @@ def format_created_at(value):
 
     if ZoneInfo is not None:
         try:
-            moment = moment.astimezone(ZoneInfo(APP_TIMEZONE))
+            moment = moment.astimezone(ZoneInfo(get_setting("APP_TIMEZONE", "Asia/Jakarta")))
         except Exception:
             moment = moment.astimezone()
     else:
